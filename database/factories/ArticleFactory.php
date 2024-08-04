@@ -17,13 +17,13 @@ class ArticleFactory extends Factory
     public function definition(): array
     {
         return [
-            'heading' => $faker->sentence(3),
-            'subheading' => $faker->sentence(4),
-            'category' => $faker->word,
-            'body' => $faker->sentence(10),
-            'pub_date' => $faker->date,
-            'img_src' => $faker->imageUrl(),
-            'refernces' => $faker->sentence(1),
+            'heading' => fake()->sentence,
+            'subheading' => fake()->sentence,
+            'category' => fake()->word,
+            'body' => fake()->sentence,
+            'pub_date' => fake()->date,
+            'img_src' => fake()->imageUrl,
+            'refernces' => fake()->sentence,
 
         ];
     }
