@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('body');
             $table->date('pub_date');
             $table->string('img_src')->nullable();
-            $table->string('refernces');
+            $table->string('references');
             $table->timestamps();
         });
     }
