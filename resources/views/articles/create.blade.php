@@ -73,7 +73,7 @@
             </div>
 
             <div class="form-group">
-                <label for="references">References (optional)</label>
+                <label for="references">References </label>
                 <input type="text" name="references" id="references" class="form-control {{ $errors->has('references') ? 'is-invalid' : '' }}" 
                        value="{{ old('references') }}" placeholder="Enter references">
                 @if($errors->has('references'))
