@@ -1,4 +1,6 @@
+@extends('layouts.app')
 
+@section('content')
 
 <div class="container">
 <h1>View article</h1>
@@ -24,4 +26,4 @@ Description </strong> </td>
 </tbody>
 </table>
 </div>
-
+@endsection

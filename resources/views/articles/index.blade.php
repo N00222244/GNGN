@@ -13,19 +13,23 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($articles as $article) <!-- Corrected from $book to $article -->
-            <tr>
-                <td>{{ $article->heading }}</td>
+            @foreach ($articles as $article) 
+             
+            <tr> 
+             <td> <a href="{{ route('articles.show', ['article' => $article->id]) }}"> {{ $article->heading }}</a></td>
                 <td>{{ $article->subheading }}</td>
                 <td>{{ $article->category }}</td>
                 <td>
+                
                     @if ($article->img_src) <!-- Corrected this condition -->
                         <img src="{{ $article->img_src }}" alt="{{ $article->heading }}" width="100">
                     @else
                         No Image
                     @endif
                 </td>
+                
             </tr>
+            
             @endforeach
         </tbody>
     </table>
