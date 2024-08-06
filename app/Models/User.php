@@ -47,7 +47,7 @@ class User extends Authenticatable
 
     public function roles()
     {
-        return $this->belongsToMany('app\Models\Role', 'user_role');
+        return $this->belongsToMany('App\Models\Role', 'user_role');
     }
 
     public function authorizeRoles($roles)
@@ -72,5 +72,5 @@ class User extends Authenticatable
     {
         return null !== $this->roles()->whereIn('name', $roles)->first();
     }
-    
+
 }
