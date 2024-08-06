@@ -35,6 +35,24 @@ return new class extends Migration
             $table->longText('payload');
             $table->integer('last_activity')->index();
         });
+
+
+
+        schema::create('user_role', function (Blueprint $table) {
+
+
+
+            $table->id();
+
+            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('role')->unsigned();
+            $table->timestamps();
+            
+        $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('restrict');
+        $table->foreign('role_id')->references('id')->on('roles')->onUpdate('cascade')->onDelete('restrict');
+        });
+
+
     }
 
     /**
@@ -45,5 +63,6 @@ return new class extends Migration
         Schema::dropIfExists('users');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
+        schema::dropIfExists('user_role');
     }
 };
