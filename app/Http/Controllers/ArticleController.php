@@ -53,15 +53,16 @@ class ArticleController extends Controller
              'updated_at' => now(),
          ]);
      
-         return to_route('articles.index')->with('success', 'Article created successfully!');
+         return to_route('articles.index');
      }
     /**
      * Display the specified resource.
      */
     public function show($id)
     {
-        $article = Article::find($id);
-        return view('articles.show')->with('article', $article);
+        
+       $article = Article::find($id);
+        return view('articles.show')->with('articles', $article);
     }
 
     /**
@@ -69,22 +70,50 @@ class ArticleController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $article = Article::find($id);
+        return view('articles.edit')->with('articles', $article);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Article $article)
     {
-        //
+    
+            $request->validate([
+                'heading' => 'required|string|max:255',
+                'subheading' => 'required|string|max:255',
+                'category' => 'required|string|max:255',
+                'body' => 'required|string',
+                'pub_date' => 'required|date',
+                'img_src' => 'nullable|url',
+                'references' => 'nullable|string|max:255',
+
+            ]);
+
+          
+
+            $article->update([
+                
+
+                'heading' => $request->heading,
+                'subheading' => $request->subheading,
+                'category' => $request->category,
+                'body' => $request->body,
+                'pub_date' => $request->pub_date,
+                'img_src' => $request->article_image_name,
+                'references' => $request->references
+            ]);
+
+            return to_route('articles.show', $article);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Article $article)
     {
-        //
+        $article->delete();
+        return to_route('articles.index')->with('success', 'Article deleted succesfully');
     }
 }

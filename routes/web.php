@@ -13,10 +13,13 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
-Route::get('/articles/create', [ArticleController::class, 'create'])->name('articles.create'); // Create article route
-Route::post('/articles', [ArticleController::class, 'store'])->name('articles.store'); // Store article route
-Route::get('/articles/{article}', [ArticleController::class, 'show'])->name('articles.show'); // Show article route
+// Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
+// Route::get('/articles/create', [ArticleController::class, 'create'])->name('articles.create');
+// Route::post('/articles', [ArticleController::class, 'store'])->name('articles.store');
+// Route::get('/articles/{article}', [ArticleController::class, 'show'])->name('articles.show');
+// Route::get('/articles/edit', [ArticleController::class, 'edit'])->name('articles.edit'); 
+// Route::put('/articles/{article}', [ArticleController::class, 'update'])->name('articles.update');
+Route::resource('articles', ArticleController::class);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
