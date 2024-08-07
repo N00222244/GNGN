@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Editor;
 
-use App\Http\Controllers\Editor;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Models\Article;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 class ArticleController extends Controller
@@ -119,7 +120,7 @@ class ArticleController extends Controller
                 'category' => $request->category,
                 'body' => $request->body,
                 'pub_date' => $request->pub_date,
-                'img_src' => $request->article_image_name,
+                'img_src' => $request->img_src,
                 'references' => $request->references
             ]);
 

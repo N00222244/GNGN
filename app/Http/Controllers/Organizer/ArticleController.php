@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Oragnizer;
+namespace App\Http\Controllers\Organizer;
 
-use App\Http\Controllers\Organizer;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Models\Article;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 class ArticleController extends Controller

@@ -16,7 +16,7 @@ Description </strong> </td>
 </tr>
 <tr>
 <td><strong> Category </strong> </td> <td>{{ $articles->category }}</td>
-<x-primary-button><a href="{{ route('edit.articles.edit', $articles)}}">edit</a> </x-primary-button>
+<x-primary-button><a href="{{ route('editor.articles.edit', $articles)}}">edit</a> </x-primary-button>
 
 </tr>
 </tbody>

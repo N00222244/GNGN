@@ -18,22 +18,30 @@
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     @if(auth()->user()->hasRole('admin'))
-                        <x-nav-link :href="route('admin.books.index')" :active="request()->routeIs('admin.books.index')">
-                            {{ __('All Books') }}
+                        <x-nav-link :href="route('admin.articles.index')" :active="request()->routeIs('admin.articles.index')">
+                            {{ __('All articles') }}
                         </x-nav-link>
                     @elseif(auth()->user()->hasRole('user'))
-                        <x-nav-link :href="route('user.books.index')" :active="request()->routeIs('user.books.index')">
-                            {{ __('All Books') }}
+                        <x-nav-link :href="route('user.articles.index')" :active="request()->routeIs('user.articles.index')">
+                            {{ __('All articles') }}
                         </x-nav-link>
-                    @else
-                        <x-nav-link :href="route('books.index')" :active="request()->routeIs('books.index')">
-                            {{ __('All Books') }}
+
+                        @elseif(auth()->user()->hasRole('editor'))
+                        <x-nav-link :href="route('editor.articles.index')" :active="request()->routeIs('editor.articles.index')">
+                            {{ __('All articles') }}
                         </x-nav-link>
+
+                        @elseif(auth()->user()->hasRole('organizer'))
+                        <x-nav-link :href="route('organizer.articles.index')" :active="request()->routeIs('organizer.articles.index')">
+                            {{ __('All articles') }}
+                        </x-nav-link>
+                    
+                        
                     @endif
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     @if(auth()->user()->hasRole('admin'))
-                        <x-nav-link :href="route('admin.books.create')" :active="request()->routeIs('admin.books.create')">
+                        <x-nav-link :href="route('admin.articles.create')" :active="request()->routeIs('admin.articles.create')">
                             {{ __('Create Book') }}
                         </x-nav-link>
                   

@@ -9,8 +9,10 @@
 <!-- Navigation menu or header content -->
 <nav>
 <ul>
-<li><a href="{{ route('articles.index') }}">All Articles</a></li> </li>
-<a href="{{ route('articles.create') }}" class="btn btn-primary">Create New Article</a>
+
+<li><a href="{{ route('user.articles.index') }}">All Articles</a></li> </li>
+<!-- <a href="{{ route('admin.articles.create','editor.articles.create') }}" class="btn btn-primary">Create New Article</a> -->
+
 
 <!-- Add more navigation links as needed -->
 </ul>
