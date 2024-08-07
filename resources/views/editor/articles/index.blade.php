@@ -16,7 +16,7 @@
             @foreach ($articles as $article) 
              
             <tr> 
-             <td> <a href="{{ route('articles.show', ['article' => $article->id]) }}"> {{ $article->heading }}</a></td>
+             <td> <a href="{{ route('editor.articles.show', ['article' => $article->id]) }}"> {{ $article->heading }}</a></td>
                 <td>{{ $article->subheading }}</td>
                 <td>{{ $article->category }}</td>
                 <td>

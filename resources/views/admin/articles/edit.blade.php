@@ -4,7 +4,7 @@
 @section('content')
 <div class="container">
     <h3 class="text-center">Edit Article</h3>
-    <form action="{{ route('articles.update', $articles->id) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.articles.update', $articles->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 

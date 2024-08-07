@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Editor;
 
+use App\Http\Controllers\Editor;
 use Illuminate\Http\Request;
 use App\Models\Article;
+
 
 class ArticleController extends Controller
 {
@@ -12,8 +14,11 @@ class ArticleController extends Controller
      */
     public function index()
     {
+        $user = Auth::user();
+        $user->authorizeRoles('editor');
+
         $articles = Article::all();
-        return view('articles.index', compact('articles'));
+        return view('editor.articles.index', compact('articles'));
     }
 
     /**
@@ -21,14 +26,17 @@ class ArticleController extends Controller
      */
 
 
-     public function create()
-    {
-        return view('articles.create'); // Ensure the view exists
-    }
+     
 
 
      public function store(Request $request)
      {
+
+
+        $user = Auth::user();
+        $user->authorizeRoles('editor');
+
+
          // Validate the request
          $request->validate([
              'heading' => 'required|string|max:255',
@@ -53,25 +61,32 @@ class ArticleController extends Controller
              'updated_at' => now(),
          ]);
      
-         return to_route('articles.index');
+         return to_route('editor.articles.index');
      }
     /**
      * Display the specified resource.
      */
     public function show($id)
     {
+        $user = Auth::user();
+        $user->authorizeRoles('editor');
         
        $article = Article::find($id);
-        return view('articles.show')->with('articles', $article);
+        return view('editor.articles.show')->with('articles', $article);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
+
     {
+
+        $user = Auth::user();
+        $user->authorizeRoles('editor');
+
         $article = Article::find($id);
-        return view('articles.edit')->with('articles', $article);
+        return view('editor.articles.edit')->with('articles', $article);
     }
 
     /**
@@ -79,6 +94,9 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
+
+        $user = Auth::user();
+        $user->authorizeRoles('editor');
     
             $request->validate([
                 'heading' => 'required|string|max:255',
@@ -105,15 +123,11 @@ class ArticleController extends Controller
                 'references' => $request->references
             ]);
 
-            return to_route('articles.show', $article);
+            return to_route('editor.articles.show', $article);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Article $article)
-    {
-        $article->delete();
-        return to_route('articles.index')->with('success', 'Article deleted succesfully');
-    }
+    
 }

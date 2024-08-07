@@ -5,6 +5,12 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Article;
 use App\Http\Controllers\ArticleController;
 
+use App\Http\Controllers\Admin\ArticleController as AdminArticleController;
+use App\Http\Controllers\User\ArticleController as UserArticleController;
+use App\Http\Controllers\Editor\ArticleController as EditorArticleController;
+use App\Http\Controllers\Organizer\ArticleController as OrganizerArticleController;
+
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -20,6 +26,10 @@ Route::get('/dashboard', function () {
 // Route::get('/articles/edit', [ArticleController::class, 'edit'])->name('articles.edit'); 
 // Route::put('/articles/{article}', [ArticleController::class, 'update'])->name('articles.update');
 Route::resource('articles', ArticleController::class);
+Route::resource('/admin/articles', AdminArticleController::class)->middleware(['auth'])->names('admin.articles');
+Route::resource('/user/articles', UserArticleController::class)->middleware(['auth'])->names('user.articles')->only(['index', 'show']);
+Route::resource('/editor/articles',EditorArticleController::class)->middleware(['auth'])->names('Editor.articles')->only(['index', 'show', 'edit']);;
+Route::resource('/organizer/articles', OrganizerArticleController::class)->middleware(['auth'])->names('organizer.articles')->only(['index', 'show']);;
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
