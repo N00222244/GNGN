@@ -41,6 +41,11 @@ Route::resource('/admin/articles', AdminArticleController::class)->middleware(['
 Route::resource('/editor/articles',EditorArticleController::class)->middleware(['auth'])->names('editor.articles')->only(['index', 'show', 'edit', 'update']);;
 Route::resource('/organizer/articles', OrganizerArticleController::class)->middleware(['auth'])->names('organizer.articles')->only(['index', 'show']);;
 
+
+Route::resource('/user/authors', UserAuthorController::class)->middleware(['auth'])->names('user.authors')->only(['index', 'show']);
+Route::resource('/admin/authors', AdminAuthorController::class)->middleware(['auth'])->names('admin.authors');
+Route::resource('/editor/authors',EditorAuthorController::class)->middleware(['auth'])->names('editor.authors')->only(['index', 'show', 'edit', 'update']);;
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
