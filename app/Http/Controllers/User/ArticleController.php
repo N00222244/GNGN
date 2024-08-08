@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Author;
 
 
 class ArticleController extends Controller
@@ -20,7 +21,7 @@ class ArticleController extends Controller
         $user = Auth::user();
         $user->authorizeRoles('user');
 
-        $articles = Article::all();
+        $articles = Article::with('author')->get();
         return view('user.articles.index', compact('articles'));
     }
 

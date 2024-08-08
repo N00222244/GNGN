@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Article;
+use App\Models\Author;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,7 +18,11 @@ class ArticleController extends Controller
         $user = Auth::user();
         $user->authorizeRoles('admin');
 
-        $articles = Article::all();
+
+
+        //$articles = Article::all();
+
+        $articles = Article::with('author')->get();
         return view('admin.articles.index', compact('articles'));
     }
 
@@ -31,8 +36,8 @@ class ArticleController extends Controller
 
         $user = Auth::user();
         $user->authorizeRoles('admin');
-
-        return view('admin.articles.create'); // Ensure the view exists
+        $authors = Author::all();
+        return view('admin.articles.create')->with('authors', $authors); 
     }
 
 
@@ -51,8 +56,9 @@ class ArticleController extends Controller
              'category' => 'required|string|max:255',
              'body' => 'required|string',
              'pub_date' => 'required|date',
-             'img_src' => 'nullable|url',
+             'img_src' => 'nullable',
              'references' => 'nullable|string|max:255',
+             'author_id'=> 'required',
          ]);
      
          // Create the article
@@ -64,6 +70,7 @@ class ArticleController extends Controller
              'pub_date' => $request->pub_date,
              'img_src' => $request->img_src,
              'references' => $request->references,
+             'author_id' => $request->author_id,
              'created_at' => now(),
              'updated_at' => now(),
          ]);
@@ -91,11 +98,12 @@ class ArticleController extends Controller
 
         $user = Auth::user();
         $user->authorizeRoles('admin');
-
         $article = Article::find($id);
-        return view('admin.articles.edit')->with('articles', $article);
+        $authors = Author::all();
+        return view('admin.articles.edit')->with('articles',$article)->with('authors',$authors);
     }
 
+    
     /**
      * Update the specified resource in storage.
      */
@@ -112,6 +120,7 @@ class ArticleController extends Controller
                 'body' => 'required|string',
                 'pub_date' => 'required|date',
                 'img_src' => 'nullable|url',
+                'author_id' => 'required',
                 'references' => 'nullable|string|max:255',
 
             ]);
@@ -127,6 +136,7 @@ class ArticleController extends Controller
                 'body' => $request->body,
                 'pub_date' => $request->pub_date,
                 'img_src' => $request->article_image_name,
+                'author_id' => $request->author_id,
                 'references' => $request->references
             ]);
 

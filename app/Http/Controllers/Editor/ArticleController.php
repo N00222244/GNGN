@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Editor;
 
 use App\Http\Controllers\Controller;
 use App\Models\Article;
+use App\Models\Author;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,7 +19,7 @@ class ArticleController extends Controller
         $user = Auth::user();
         $user->authorizeRoles('editor');
 
-        $articles = Article::all();
+        $articles = Article::with('author')->get();
         return view('editor.articles.index', compact('articles'));
     }
 
@@ -85,9 +86,9 @@ class ArticleController extends Controller
 
         $user = Auth::user();
         $user->authorizeRoles('editor');
-
         $article = Article::find($id);
-        return view('editor.articles.edit')->with('articles', $article);
+        $authors = Author::all();
+        return view('editor.articles.edit')->with('articles',$article)->with('authors',$authors);
     }
 
     /**
@@ -106,6 +107,8 @@ class ArticleController extends Controller
                 'body' => 'required|string',
                 'pub_date' => 'required|date',
                 'img_src' => 'nullable|url',
+                'author_id' => 'required',
+                
                 'references' => 'nullable|string|max:255',
 
             ]);
@@ -121,6 +124,7 @@ class ArticleController extends Controller
                 'body' => $request->body,
                 'pub_date' => $request->pub_date,
                 'img_src' => $request->img_src,
+                'author_id' => $request->author_id,
                 'references' => $request->references
             ]);
 
@@ -131,4 +135,5 @@ class ArticleController extends Controller
      * Remove the specified resource from storage.
      */
     
+
 }

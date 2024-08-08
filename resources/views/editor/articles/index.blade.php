@@ -1,7 +1,7 @@
-@extends ('layouts.app') 
+@extends('layouts.app')
 
 @section('content')
-<div class="container"> 
+<div class="container">
     <h1>All Articles</h1>
     <table class="table">
         <thead>
@@ -10,28 +10,29 @@
                 <th>Subheading</th>
                 <th>Category</th>
                 <th>Image</th>
+                <th>Author</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($articles as $article) 
-             
-            <tr> 
-             <td> <a href="{{ route('editor.articles.show', ['article' => $article->id]) }}"> {{ $article->heading }}</a></td>
+            @foreach ($articles as $article)
+            <tr>
+                <td><a href="{{ route('editor.articles.show', ['article' => $article->id]) }}">{{ $article->heading }}</a></td>
                 <td>{{ $article->subheading }}</td>
                 <td>{{ $article->category }}</td>
                 <td>
-                
-                    @if ($article->img_src) <!-- Corrected this condition -->
+                    @if ($article->img_src)
                         <img src="{{ $article->img_src }}" alt="{{ $article->heading }}" width="100">
                     @else
                         No Image
                     @endif
                 </td>
-                
+                <td>{{ $article->author->name }}</td>
             </tr>
-            
             @endforeach
         </tbody>
     </table>
+    
 </div>
+
+
 @endsection

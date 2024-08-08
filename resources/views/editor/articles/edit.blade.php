@@ -84,6 +84,9 @@
                 </span>
             @endif
         </div>
+        <div class="mt-6">
+                        <x-select-author name="author_id" :authors="$authors" :selected="old('author_id')"/>
+                    </div>
 
         <button type="submit" class="btn btn-primary">Update</button>
     </form>

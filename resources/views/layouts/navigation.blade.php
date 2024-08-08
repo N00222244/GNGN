@@ -46,7 +46,24 @@
                         </x-nav-link>
                   
                     @endif
-                </div>                
+                </div>           
+                
+                </div>   
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    @if(auth()->user()->hasRole('admin'))
+                        <x-nav-link :href="route('admin.authors.index')" :active="request()->routeIs('admin.articles.index')">
+                            {{ __('Authors') }}
+                        </x-nav-link>
+                    @elseif(auth()->user()->hasRole('user'))
+                        <x-nav-link :href="route('user.authors.index')" :active="request()->routeIs('user.articles.index')">
+                            {{ __('Author') }}
+                        </x-nav-link>
+                    @elseif(auth()->user()->hasRole('editor'))
+                        <x-nav-link :href="route('editor.authors.index')" :active="request()->routeIs('editor.articles.index')">
+                            {{ __('All articles') }}
+                        </x-nav-link>
+                    @endif
+                </div>  
           
 
             <!-- Settings Dropdown -->

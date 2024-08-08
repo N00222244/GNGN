@@ -1,0 +1,31 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::table('articles', function (Blueprint $table) {
+            $table->unsignedBigInteger('author_id'); // Correct syntax for adding a column
+            $table->foreign('author_id')->references('id')->on('authors')->onDelete('restrict'); // Correct foreign key definition
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::table('articles', function (Blueprint $table) {
+            $table->dropForeign(['author_id']); // Correct foreign key drop syntax
+            $table->dropColumn('author_id'); // Correct column drop syntax
+        });
+    }
+};
+

@@ -12,6 +12,12 @@ use App\Http\Controllers\User\ArticleController as UserArticleController;
 use App\Http\Controllers\Editor\ArticleController as EditorArticleController;
 use App\Http\Controllers\Organizer\ArticleController as OrganizerArticleController;
 
+use App\Http\Controllers\Admin\PublisherController as AdminPublisherController;
+use App\Http\Controllers\User\PublisherController as UserPublisherController;
+use App\Http\Controllers\Editor\PublisherController as EditorPublisherController;
+
+
+
 
 Route::get('/', function () {
     return view('welcome');

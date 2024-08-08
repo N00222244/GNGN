@@ -62,9 +62,9 @@
             </div>
 
             <div class="form-group">
-                <label for="img_src">Image URL (optional)</label>
-                <input type="url" name="img_src" id="img_src" class="form-control {{ $errors->has('img_src') ? 'is-invalid' : '' }}" 
-                       value="{{ old('img_src') }}" placeholder="Enter image URL">
+                <label for="img_src">Image Source (optional)</label>
+                <input type="text" name="img_src" id="img_src" class="form-control {{ $errors->has('img_src') ? 'is-invalid' : '' }}" 
+                       value="{{ old('img_src') }}" placeholder="Enter image Source">
                 @if($errors->has('img_src'))
                     <span class="invalid-feedback">
                         {{ $errors->first('img_src') }}
@@ -82,6 +82,10 @@
                     </span>
                 @endif
             </div>
+
+            <div class="mt-6">
+                        <x-select-author name="author_id" :authors="$authors" :selected="old('author_id')"/>
+                    </div>
 
             <button type="submit" class="btn btn-primary">Create</button>
         </form>
