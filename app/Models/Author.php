@@ -10,9 +10,18 @@ class Author extends Model
 {
     use HasFactory;
 
-    public function articles()
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'name',
+    ];
 
+    public function articles()
     {
         return $this->hasMany(Article::class);
     }
 }
+

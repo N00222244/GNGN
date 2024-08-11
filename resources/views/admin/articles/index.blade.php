@@ -1,39 +1,29 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <h1>All Articles</h1>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Heading</th>
-                <th>Subheading</th>
-                <th>Category</th>
-                <th>Image</th>
-                <th>Author</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($articles as $article)
-            <tr>
-                <td><a href="{{ route('admin.articles.show', ['article' => $article->id]) }}">{{ $article->heading }}</a></td>
-                <td>{{ $article->subheading }}</td>
-                <td>{{ $article->category }}</td>
-                <td>
-                    @if ($article->img_src)
-                        <img src="{{ $article->img_src }}" alt="{{ $article->heading }}" width="100">
-                    @else
-                        No Image
-                    @endif
-                </td>
-                <td>{{ $article->author->name }}</td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
-    <a href="{{ route('admin.articles.create') }}" class="btn-link btn-lg mb-2">Add an Article</a>
+<div class="container mx-auto px-4">
+    
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        @foreach ($articles as $article)
+        <div class="bg-black rounded-lg shadow-md p-4" style="background-color: black;">
+            @if ($article->img_src)
+                <img src="{{ $article->img_src }}" alt="{{ $article->heading }}" class="w-full h-48 object-cover rounded-t-lg">
+            @else
+                <div class="bg-gray-200 h-48 rounded-t-lg flex items-center justify-center">
+                    <span class="text-white">No Image</span>
+                </div>
+            @endif
+            <h5 class="text-lg font-semibold mt-2">
+                <a href="{{ route('admin.articles.show', ['article' => $article->id]) }}" class="text-white hover:text-green-500 hover:underline">
+                    {{ $article->heading }}
+                </a>
+            </h5>
+            <p class="text-white">{{ $article->subheading }}</p>
+        </div>
+        @endforeach
+    </div>
 </div>
-
-
 @endsection
+
+
 

@@ -3,7 +3,9 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Article;
+use App\Models\Author;
 use Illuminate\Support\Facades\Auth;
+
 
 
 
@@ -12,9 +14,11 @@ use App\Http\Controllers\User\ArticleController as UserArticleController;
 use App\Http\Controllers\Editor\ArticleController as EditorArticleController;
 use App\Http\Controllers\Organizer\ArticleController as OrganizerArticleController;
 
-use App\Http\Controllers\Admin\PublisherController as AdminPublisherController;
-use App\Http\Controllers\User\PublisherController as UserPublisherController;
-use App\Http\Controllers\Editor\PublisherController as EditorPublisherController;
+use App\Http\Controllers\Admin\AuthorController as AdminAuthorController;
+use App\Http\Controllers\User\AuthorController as UserAuthorController;
+use App\Http\Controllers\Editor\AuthorController as EditorAuthorController;
+
+
 
 
 
@@ -24,8 +28,10 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+    $articles = Article::latest()->take(3)->get(); // Fetching the latest 3 articles
+    return view('dashboard', ['articles' => $articles]);
+})->middleware(['auth'])->name('dashboard');
+
 
 // Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
 // Route::get('/articles/create', [ArticleController::class, 'create'])->name('articles.create');

@@ -106,7 +106,7 @@ class ArticleController extends Controller
                 'category' => 'required|string|max:255',
                 'body' => 'required|string',
                 'pub_date' => 'required|date',
-                'img_src' => 'nullable|url',
+                'img_src' => 'nullable',
                 'author_id' => 'required',
                 
                 'references' => 'nullable|string|max:255',
