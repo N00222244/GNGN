@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('articles', function (Blueprint $table) {
-            $table->unsignedBigInteger('author_id'); // Correct syntax for adding a column
+            $table->unsignedBigInteger('author_id'); 
             $table->foreign('author_id')->references('id')->on('authors')->onDelete('restrict'); // Correct foreign key definition
         });
     }
@@ -23,8 +23,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('articles', function (Blueprint $table) {
-            $table->dropForeign(['author_id']); // Correct foreign key drop syntax
-            $table->dropColumn('author_id'); // Correct column drop syntax
+            $table->dropForeign(['author_id']); 
+            $table->dropColumn('author_id'); 
         });
     }
 };
